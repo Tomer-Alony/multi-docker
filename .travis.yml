@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t tomeralony/client-tests -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true tomeralony/client-tests npm run test
+
+after_success:
+  - docker build -t tomeralony/multi-docker-client ./client
+  - docker build -t tomeralony/multi-docker-nginx ./nginx
+  - docker build -t tomeralony/multi-docker-server ./server
+  - docker build -t tomeralony/multi-docker-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push tomeralony/multi-docker-client
+  - docker push tomeralony/multi-docker-nginx
+  - docker push tomeralony/multi-docker-server
+  - docker push tomeralony/multi-docker-worker
