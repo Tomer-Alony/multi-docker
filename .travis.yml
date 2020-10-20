@@ -8,12 +8,12 @@ script:
   - docker run -e CI=true tomeralony/client-tests npm run test
 
 after_success:
-  - docker build -t tomeralony/multi-docker-client ./client
-  - docker build -t tomeralony/multi-docker-nginx ./nginx
-  - docker build -t tomeralony/multi-docker-server ./server
-  - docker build -t tomeralony/multi-docker-worker ./worker
+  - docker build -t sturs23/multi-docker-client ./client
+  - docker build -t sturs23/multi-docker-nginx ./nginx
+  - docker build -t sturs23/multi-docker-server ./server
+  - docker build -t sturs23/multi-docker-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push tomeralony/multi-docker-client
-  - docker push tomeralony/multi-docker-nginx
-  - docker push tomeralony/multi-docker-server
-  - docker push tomeralony/multi-docker-worker
+  - docker push sturs23/multi-docker-client
+  - docker push sturs23/multi-docker-nginx
+  - docker push sturs23/multi-docker-server
+  - docker push sturs23/multi-docker-worker
