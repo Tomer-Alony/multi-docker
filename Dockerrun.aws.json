@@ -11,14 +11,14 @@
     {
       "name": "server",
       "image": "sturs23/multi-docker-server",
-      "hostname": "server",
+      "hostname": "api",
       "essential": false,
       "memory": 128
     },
     {
       "name": "worker",
       "image": "sturs23/multi-docker-worker",
-      "hostname": "api",
+      "hostname": "worker",
       "essential": false,
       "memory": 128
     },
