@@ -17,3 +17,15 @@ after_success:
   - docker push sturs23/multi-docker-nginx
   - docker push sturs23/multi-docker-server
   - docker push sturs23/multi-docker-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket_name: elasticbeanstalk-us-east-2-954877974658
+  bucket_path: docker-multi
